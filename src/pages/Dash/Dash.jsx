@@ -10,21 +10,23 @@ export default function App() {
     const [ready, setReady] = useState(false);
     const textRef = useRef(null);
     const fadeOutTimeoutRef = useRef(null);
+    const savedNameRef = useRef(localStorage.getItem("userName"));
 
     useEffect(() => {
-        const savedName = localStorage.getItem("userName");
-        if (!savedName) return navigate("/name");
-
-        setDisplayedCompliment(savedName); 
+        if (!savedNameRef.current) return navigate("/name");
         setReady(true);
+    }, []);
 
-        const intervalId = setInterval(setDisplayedCompliment, 7500, savedName);
+    useEffect(() => {
+        setDisplayedCompliment(savedNameRef.current); 
+
+        const intervalId = setInterval(setDisplayedCompliment, 7500, savedNameRef.current);
 
         return () => { 
             clearInterval(intervalId); 
             clearTimeout(fadeOutTimeoutRef.current);
         };
-    }, []);
+    }, [ready])
 
     const setDisplayedCompliment = (nameToUse) => {
         if (!textRef.current) return;
@@ -42,7 +44,7 @@ export default function App() {
 
     const changeName = () => navigate("/name");
 
-    if (!ready) return; 
+    if (!ready) return null; 
     return (
         <div className="app">
             <button onClick={changeName}> Change Name </button> 
