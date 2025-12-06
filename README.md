@@ -1,4 +1,4 @@
-# 🎉 v1.0.0: Dopamine Addict Release
+# 🎉 v1.0.1: "Compliment" App
 
 ![Status](https://img.shields.io/badge/status-stable-success) ![Vibe](https://img.shields.io/badge/vibe-impeccable-purple) ![Release](https://img.shields.io/badge/release-final-red)
 
