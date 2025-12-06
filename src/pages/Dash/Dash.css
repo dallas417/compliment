@@ -1,0 +1,39 @@
+.app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.app p {
+    animation: none;
+    text-align: center;
+    margin: 20px;
+    font-size: 3em;
+    font-weight: 700;
+}
+
+.app button {
+    position: fixed;
+    left: 0; 
+    top: 0; 
+    margin-left: 5px;
+    margin-top: 5px;
+
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: .6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: light-dark(#f9f9f9, #1a1a1a);
+    cursor: pointer;
+    transition: border-color .25s;
+}
+
+.app button:hover {
+  border-color: #646cff;
+}

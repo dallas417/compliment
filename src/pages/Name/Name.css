@@ -1,0 +1,27 @@
+.name-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.name-page p {
+    position: fixed;
+    margin-bottom: 7em;
+}
+
+.name-page input {
+    box-sizing: border-box;
+    width: 400px;
+    height: 40px;
+    outline: none;
+    background: transparent;
+    border: 3px solid transparent; 
+    border-bottom: 3px solid light-dark(#213547, white);
+    border-radius: 0px;
+    font-weight: 700;
+    font-size: 2em;
+}
