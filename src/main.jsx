@@ -14,7 +14,6 @@ function Layout() {
     );
 };
 
-
 const root = document.getElementById("root"); 
 const router = createHashRouter([
     {

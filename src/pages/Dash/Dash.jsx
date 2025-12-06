@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function App() {
     const navigate = useNavigate(); 
     const [text, setText] = useState(null);
+    const [ready, setReady] = useState(false);
     const textRef = useRef(null);
     const fadeOutTimeoutRef = useRef(null);
 
@@ -15,7 +16,8 @@ export default function App() {
         if (!savedName) return navigate("/name");
 
         setDisplayedCompliment(savedName); 
-        
+        setReady(true);
+
         const intervalId = setInterval(setDisplayedCompliment, 7500, savedName);
 
         return () => { 
@@ -40,6 +42,7 @@ export default function App() {
 
     const changeName = () => navigate("/name");
 
+    if (!ready) return; 
     return (
         <div className="app">
             <button onClick={changeName}> Change Name </button> 
