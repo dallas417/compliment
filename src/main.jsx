@@ -22,7 +22,9 @@ const router = createBrowserRouter([
         element: <Layout />,
         errorElement: <ErrorPage />
     }
-]);
+], {
+    basename: "/compliment" 
+});
 
 createRoot(root).render(
     <StrictMode>
