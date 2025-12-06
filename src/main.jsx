@@ -1,6 +1,6 @@
 import { StrictMode } from "react"; 
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import AnimatedOutlet from "./routing/AnimatedOutlet";
 import ErrorPage from "./pages/Error/ErrorPage";
 
@@ -16,15 +16,13 @@ function Layout() {
 
 
 const root = document.getElementById("root"); 
-const router = createBrowserRouter([
+const router = createHashRouter([
     {
         path: "/*",
         element: <Layout />,
         errorElement: <ErrorPage />
     }
-], {
-    basename: "/compliment" 
-});
+]);
 
 createRoot(root).render(
     <StrictMode>
