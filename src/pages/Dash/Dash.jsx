@@ -3,11 +3,14 @@ import "../../assets/animate.css";
 import compliments from "../../data/compliments.json";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { array as badwords } from "badwords-list"; 
+import Swal from "sweetalert2";
 
 export default function App() {
     const navigate = useNavigate(); 
     const [text, setText] = useState(null);
     const [ready, setReady] = useState(false);
+    const [userHasInappropriateName, setUserHasInappropriateName] = useState(null);
     const textRef = useRef(null);
     const fadeOutTimeoutRef = useRef(null);
     const savedNameRef = useRef(localStorage.getItem("userName"));
@@ -17,16 +20,40 @@ export default function App() {
         setReady(true);
     }, []);
 
+    useEffect(() => { 
+        checkNameAppropriate(savedNameRef.current);
+    }, [ready])
+
     useEffect(() => {
-        setDisplayedCompliment(savedNameRef.current); 
-
+        if (!ready || userHasInappropriateName === null) return;
+        setDisplayedCompliment(savedNameRef.current);
         const intervalId = setInterval(setDisplayedCompliment, 7500, savedNameRef.current);
-
+        
         return () => { 
             clearInterval(intervalId); 
             clearTimeout(fadeOutTimeoutRef.current);
         };
-    }, [ready])
+    }, [userHasInappropriateName])
+
+    const checkNameAppropriate = (name) => {
+        const lowerCaseName = name.toLowerCase();
+        for (let i = 0; i < badwords.length; i++) {
+            if (lowerCaseName.includes(badwords[i])) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Inappropriate Names DO NOT deserve compliments!",
+                    toast: true,
+                    position: "top-end",
+                    timer: 4000,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                })
+                navigate("/name");
+                return false;
+            }
+        }
+        setUserHasInappropriateName(false);
+    }
 
     const setDisplayedCompliment = (nameToUse) => {
         if (!textRef.current) return;
