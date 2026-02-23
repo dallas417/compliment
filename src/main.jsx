@@ -15,7 +15,7 @@ function Layout() {
         </>
     );
 };
-//try
+
 const root = document.getElementById("root"); 
 const router = createHashRouter([
     {
